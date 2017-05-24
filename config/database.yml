@@ -1,25 +1,61 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# Oracle/OCI 8i, 9, 10g
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# Requires Ruby/OCI8:
+#  https://github.com/kubo/ruby-oci8
+#
+# Specify your database using any valid connection syntax, such as a
+# tnsnames.ora service name, or an SQL connect string of the form:
+#
+#   //host:[port][/service name]
+#
+# By default prefetch_rows (OCI_ATTR_PREFETCH_ROWS) is set to 100. And
+# until true bind variables are supported, cursor_sharing is set by default
+# to 'similar'. Both can be changed in the configuration below; the defaults
+# are equivalent to specifying:
+#
+#  prefetch_rows: 100
+#  cursor_sharing: similar
 #
 default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: oracle_enhanced
+
+  username: asif  
+  password: 12345
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  # database: oracle_test_development
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  # database: oracle_test_test
+  
 
+# As with config/secrets.yml, you never want to store sensitive information,
+# like your database password, in your source code. If your source code is
+# ever seen by anyone, they now have access to your database.
+#
+# Instead, provide the password as a unix environment variable when you boot
+# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
+# for a full rundown on how to provide these environment variables in a
+# production deployment.
+#
+# On Heroku and other platform providers, you may have a full connection URL
+# available as an environment variable. For example:
+#
+#   DATABASE_URL="oracle://myuser:mypass@localhost/somedatabase"
+#
+# You can use this database configuration with:
+#
+#   production:
+#     url: <%= ENV['DATABASE_URL'] %>
+#
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: oracle_test_production
+  username: oracle_test
+  password: <%= ENV['ORACLE_TEST_DATABASE_PASSWORD'] %>
