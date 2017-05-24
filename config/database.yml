@@ -18,7 +18,7 @@
 #
 default: &default
   adapter: oracle_enhanced
-
+  database: //localhost:1521/xe
   username: asif  
   password: 12345
 
