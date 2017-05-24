@@ -1,0 +1,72 @@
+<%= form_for(material_requirement) do |f| %>
+  <% if material_requirement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(material_requirement.errors.count, "error") %> prohibited this material_requirement from being saved:</h2>
+
+      <ul>
+      <% material_requirement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :plant_id %>
+    <%= f.text_field :plant_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :order_date %>
+    <%= f.date_select :order_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_code %>
+    <%= f.text_field :item_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_description %>
+    <%= f.text_field :item_description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_type %>
+    <%= f.text_field :item_type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_type_description %>
+    <%= f.text_field :item_type_description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :uom %>
+    <%= f.text_field :uom %>
+  </div>
+
+  <div class="field">
+    <%= f.label :demand %>
+    <%= f.number_field :demand %>
+  </div>
+
+  <div class="field">
+    <%= f.label :receipts %>
+    <%= f.number_field :receipts %>
+  </div>
+
+  <div class="field">
+    <%= f.label :inv_on_hand %>
+    <%= f.number_field :inv_on_hand %>
+  </div>
+
+  <div class="field">
+    <%= f.label :inventory_run_out_time %>
+    <%= f.datetime_select :inventory_run_out_time %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

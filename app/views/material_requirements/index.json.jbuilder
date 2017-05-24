@@ -1,0 +1,1 @@
+json.array! @material_requirements, partial: 'material_requirements/material_requirement', as: :material_requirement

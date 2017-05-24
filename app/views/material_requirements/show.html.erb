@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plant:</strong>
+  <%= @material_requirement.plant %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @material_requirement.order_date %>
+</p>
+
+<p>
+  <strong>Item code:</strong>
+  <%= @material_requirement.item_code %>
+</p>
+
+<p>
+  <strong>Item description:</strong>
+  <%= @material_requirement.item_description %>
+</p>
+
+<p>
+  <strong>Item type:</strong>
+  <%= @material_requirement.item_type %>
+</p>
+
+<p>
+  <strong>Item type description:</strong>
+  <%= @material_requirement.item_type_description %>
+</p>
+
+<p>
+  <strong>Uom:</strong>
+  <%= @material_requirement.uom %>
+</p>
+
+<p>
+  <strong>Demand:</strong>
+  <%= @material_requirement.demand %>
+</p>
+
+<p>
+  <strong>Receipts:</strong>
+  <%= @material_requirement.receipts %>
+</p>
+
+<p>
+  <strong>Inv on hand:</strong>
+  <%= @material_requirement.inv_on_hand %>
+</p>
+
+<p>
+  <strong>Inventory run out time:</strong>
+  <%= @material_requirement.inventory_run_out_time %>
+</p>
+
+<%= link_to 'Edit', edit_material_requirement_path(@material_requirement) %> |
+<%= link_to 'Back', material_requirements_path %>

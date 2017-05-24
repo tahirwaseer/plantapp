@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524151845) do
+ActiveRecord::Schema.define(version: 20170524152910) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -18,6 +18,24 @@ ActiveRecord::Schema.define(version: 20170524151845) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
+  create_table "material_requirements", force: :cascade do |t|
+    t.integer  "plant_id",               precision: 38
+    t.date     "order_date"
+    t.string   "item_code"
+    t.string   "item_description"
+    t.string   "item_type"
+    t.string   "item_type_description"
+    t.string   "uom"
+    t.integer  "demand",                 precision: 38
+    t.integer  "receipts",               precision: 38
+    t.integer  "inv_on_hand",            precision: 38
+    t.datetime "inventory_run_out_time", precision: 6
+    t.datetime "created_at",             precision: 6,  null: false
+    t.datetime "updated_at",             precision: 6,  null: false
+  end
+
+  add_index "material_requirements", ["plant_id"], name: "i_mat_req_pla_id"
 
   create_table "plants", force: :cascade do |t|
     t.string   "region_name"
@@ -49,4 +67,5 @@ ActiveRecord::Schema.define(version: 20170524151845) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "i_users_reset_password_token", unique: true
 
+  add_foreign_key "material_requirements", "plants"
 end

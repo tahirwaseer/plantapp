@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Material Requirements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plant</th>
+      <th>Order date</th>
+      <th>Item code</th>
+      <th>Item description</th>
+      <th>Item type</th>
+      <th>Item type description</th>
+      <th>Uom</th>
+      <th>Demand</th>
+      <th>Receipts</th>
+      <th>Inv on hand</th>
+      <th>Inventory run out time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @material_requirements.each do |material_requirement| %>
+      <tr>
+        <td><%= material_requirement.plant %></td>
+        <td><%= material_requirement.order_date %></td>
+        <td><%= material_requirement.item_code %></td>
+        <td><%= material_requirement.item_description %></td>
+        <td><%= material_requirement.item_type %></td>
+        <td><%= material_requirement.item_type_description %></td>
+        <td><%= material_requirement.uom %></td>
+        <td><%= material_requirement.demand %></td>
+        <td><%= material_requirement.receipts %></td>
+        <td><%= material_requirement.inv_on_hand %></td>
+        <td><%= material_requirement.inventory_run_out_time %></td>
+        <td><%= link_to 'Show', material_requirement %></td>
+        <td><%= link_to 'Edit', edit_material_requirement_path(material_requirement) %></td>
+        <td><%= link_to 'Destroy', material_requirement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Material Requirement', new_material_requirement_path %>

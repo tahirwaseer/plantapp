@@ -1,0 +1,1 @@
+json.partial! "material_requirements/material_requirement", material_requirement: @material_requirement
