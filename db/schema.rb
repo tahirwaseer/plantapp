@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524143151) do
+ActiveRecord::Schema.define(version: 20170524151845) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -21,13 +21,12 @@ ActiveRecord::Schema.define(version: 20170524143151) do
 
   create_table "plants", force: :cascade do |t|
     t.string   "region_name"
+    t.string   "plant_code"
     t.string   "plant_name"
-    t.datetime "created_at",  precision: 6,  null: false
-    t.datetime "updated_at",  precision: 6,  null: false
-    t.integer  "user_id",     precision: 38
+    t.boolean  "Active"
+    t.datetime "created_at",  precision: 6, null: false
+    t.datetime "updated_at",  precision: 6, null: false
   end
-
-  add_index "plants", ["user_id"], name: "index_plants_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                 default: "", null: false
@@ -43,10 +42,11 @@ ActiveRecord::Schema.define(version: 20170524143151) do
     t.datetime "created_at",             precision: 6
     t.datetime "updated_at",             precision: 6
     t.string   "name"
+    t.date     "effective_start_date"
+    t.date     "effective_end_date"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "i_users_reset_password_token", unique: true
 
-  add_foreign_key "plants", "users"
 end
