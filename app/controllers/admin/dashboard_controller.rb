@@ -1,8 +1,8 @@
 class Admin::DashboardController < ApplicationController
-  before_action :authentication_user
+  before_filter :authenticate_user!
   def index
     if !current_user.admin?
-      redirect_to :root_path, :notice => "Access Denied"
+      redirect_to root_path, :notice => "Access Denied"
     end
   end
 

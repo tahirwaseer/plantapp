@@ -3,20 +3,9 @@ Rails.application.routes.draw do
     get 'dashboard/index'
   end
 
+  get '/admin', to: "admin/dashboard#index"
   namespace :admin do
-    get 'dashboard/new'
-  end
-
-  namespace :admin do
-    get 'dashboard/create'
-  end
-
-  namespace :admin do
-    get 'dashboard/update'
-  end
-
-  namespace :admin do
-    get 'dashboard/destroy'
+    resources :dashboard
   end
 
   resources :material_requirements
