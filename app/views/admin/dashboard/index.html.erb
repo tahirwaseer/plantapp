@@ -1,2 +1,135 @@
-<h1>Admin::Dashboard#index</h1>
-<p>Find me in app/views/admin/dashboard/index.html.erb</p>
+
+	<div class="container padd">
+		<div class="row">
+			<div class="col-sm-2 col-sm-offset-10">
+				<button class="btn">Save</button>
+				<button class="btn">Cancel</button>
+			</div>
+			
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<select class="form-control">
+					<option value="123">Superman</option>
+					<option value="456">Batman</option>
+					<option value="789">Spiderman</option>
+					<option value="654">Captain America</option>
+				</select>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+		<div class="row style-select">
+			<div class="col-md-12">
+				<div class="subject-info-box-1">
+					<label>Available Superheroes</label>
+					<select multiple class="form-control" id="lstBox1">
+						<option value="123">Superman</option>
+						<option value="456">Batman</option>
+						<option value="789">Spiderman</option>
+						<option value="654">Captain America</option>
+					</select>
+				</div>
+
+				<div class="subject-info-arrows text-center">
+					<br /><br />
+					<input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />
+					<input type='button' id='btnRight' value='>' class="btn btn-default" /><br />
+					<input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />
+					<input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />
+				</div>
+
+				<div class="subject-info-box-2">
+					<label>Superheroes You Have Selected</label>
+					<select multiple class="form-control" id="lstBox2">
+						<option value="765">Nick Fury</option>
+						<option value="698">The Hulk</option>
+						<option value="856">Iron Man</option>
+					</select>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+        $('#btnAvenger').click(function (e) {
+            $('select').moveToList('#StaffList', '#PresenterList');
+            e.preventDefault();
+        });
+
+        $('#btnRemoveAvenger').click(function (e) {
+            $('select').removeSelected('#PresenterList');
+            e.preventDefault();
+        });
+
+        $('#btnAvengerUp').click(function (e) {
+            $('select').moveUpDown('#PresenterList', true, false);
+            e.preventDefault();
+        });
+
+        $('#btnAvengerDown').click(function (e) {
+            $('select').moveUpDown('#PresenterList', false, true);
+            e.preventDefault();
+        });
+
+        $('#btnShield').click(function (e) {
+            $('select').moveToList('#StaffList', '#ContactList');
+            e.preventDefault();
+        });
+
+        $('#btnRemoveShield').click(function (e) {
+            $('select').removeSelected('#ContactList');
+            e.preventDefault();
+        });
+
+        $('#btnShieldUp').click(function (e) {
+            $('select').moveUpDown('#ContactList', true, false);
+            e.preventDefault();
+        });
+
+        $('#btnShieldDown').click(function (e) {
+            $('select').moveUpDown('#ContactList', false, true);
+            e.preventDefault();
+        });
+
+        $('#btnJusticeLeague').click(function (e) {
+            $('select').moveToList('#StaffList', '#FacilitatorList');
+            e.preventDefault();
+        });
+
+        $('#btnRemoveJusticeLeague').click(function (e) {
+            $('select').removeSelected('#FacilitatorList');
+            e.preventDefault();
+        });
+
+        $('#btnJusticeLeagueUp').click(function (e) {
+            $('select').moveUpDown('#FacilitatorList', true, false);
+            e.preventDefault();
+        });
+
+        $('#btnJusticeLeagueDown').click(function (e) {
+            $('select').moveUpDown('#FacilitatorList', false, true);
+            e.preventDefault();
+        });
+		
+        $('#btnRight').click(function (e) {
+            $('select').moveToListAndDelete('#lstBox1', '#lstBox2');
+            e.preventDefault();
+        });
+
+        $('#btnAllRight').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
+            e.preventDefault();
+        });
+
+        $('#btnLeft').click(function (e) {
+            $('select').moveToListAndDelete('#lstBox2', '#lstBox1');
+            e.preventDefault();
+        });
+
+        $('#btnAllLeft').click(function (e) {
+            $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
+            e.preventDefault();
+        });
+    </script>
