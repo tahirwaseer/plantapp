@@ -9,12 +9,8 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-4">
-				<select class="form-control">
-					<option value="123">Superman</option>
-					<option value="456">Batman</option>
-					<option value="789">Spiderman</option>
-					<option value="654">Captain America</option>
-				</select>
+				<%= select_tag "users", options_from_collection_for_select(@users, "id", "name"),class: "form-control" %>
+				
 			</div>
 		</div>
 
@@ -23,13 +19,7 @@
 		<div class="row region-margin">
 			<div class="col-sm-12">
 				<div class="col-sm-4">
-					<select class="form-control">
-						<option value="123">Select region </option>
-						<option value="123">Superman</option>
-						<option value="456">Batman</option>
-						<option value="789">Spiderman</option>
-						<option value="654">Captain America</option>
-					</select>
+					<%= select_tag "regions", options_from_collection_for_select(@select_region, "id", "region_name"),class: "form-control" %>
 				</div>
 			</div>
 		</div>
