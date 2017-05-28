@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: "admin/dashboard#index"
-  namespace :admin do
-    resources :dashboard
-  end
+  # namespace :admin do
+  #   resources :dashboard
+  # end
 
   resources :material_requirements
   resources :plants do
