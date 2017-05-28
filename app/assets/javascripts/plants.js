@@ -4,6 +4,9 @@ $(document).ready(function() {
 		
 	}
 	$('#btnRight').click(function (e) {
+		if ($('#user option:selected').val()=="") {
+			alert("Select User Before plant assignment")
+		}else{
 			$.ajax({
 			  url: "/plants/assign_plants",
 			  type: "POST",
@@ -12,11 +15,7 @@ $(document).ready(function() {
 			  	"user" : $('#user option:selected').val()
 				}
 			});
-
-	    // $('select').moveToListAndDelete('#lstBox1', '#lstBox2');
-
-      
-
+		}
 	    e.preventDefault();
 	});
 
@@ -26,6 +25,9 @@ $(document).ready(function() {
 	});
 
 	$('#btnLeft').click(function (e) {
+		if ($('#user option:selected').val()=="") {
+			alert("Select User Before plant assignment")
+		}else{
 			$.ajax({
 			  url: "/plants/remove_plants",
 			  type: "POST",
@@ -34,7 +36,7 @@ $(document).ready(function() {
 			 			  	"user" : $('#user option:selected').val()
 			 				}
 			});
-
+		}
 	    // $('select').moveToListAndDelete('#lstBox2', '#lstBox1');
 	    e.preventDefault();
 	});
