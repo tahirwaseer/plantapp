@@ -2,34 +2,46 @@
 
 
 	<div class="container padd">
+		
+		<div class="row">
+			<div class="col-sm-4 user-selection">
+				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name"),class: "form-control",id: "lstBox1" %>
+				
+			</div>
+		</div>
 
 		<div class="row">
+			<%@plant_with_material.each do |plant|%>
+			<% @material = plant.material_requirements %>
+			<%@material.each do |mat|%>
 			<table class="table">
 			    <thead>
 			      <tr>
-			        <th>Firstname</th>
-			        <th>Lastname</th>
-			        <th>Email</th>
+			        <th>Item</th>
+			        <th>Demand</th>
+			        <th>Receipt</th>
+			        <th>Inventry On Demand</th>
+			        <th>UOM</th>
+			        <th>Inventry Runout</th>
+
 			      </tr>
 			    </thead>
-			    <tbody>
+			    <tbody class="plant-body">
 			      <tr>
-			        <td>John</td>
-			        <td>Doe</td>
-			        <td>john@example.com</td>
+			        <td><%= mat.item_code%></td>
+			        <td><%= mat.demand%></td>
+			        <td><%= mat.receipts%></td>
+			        <td><%= mat.inv_on_hand%></td>
+			        <td><%= mat.uom%></td>
+			        <td><%= mat.inventory_run_out_time%></td>
+
+
 			      </tr>
-			      <tr>
-			        <td>Mary</td>
-			        <td>Moe</td>
-			        <td>mary@example.com</td>
-			      </tr>
-			      <tr>
-			        <td>July</td>
-			        <td>Dooley</td>
-			        <td>july@example.com</td>
-			      </tr>
+			      
 			    </tbody>
 			  </table>
+			  <% end %>
+			<% end %>
 		</div>
 
 	</div>
