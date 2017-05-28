@@ -1,15 +1,16 @@
 
 	<div class="container padd">
+	<%= form_tag '/admin/dashboard' do -%>
 		<div class="row">
 			<div class="col-sm-2 col-sm-offset-10">
-				<button class="btn">Save</button>
+				<%= submit_tag "Save",class: "btn" %>
 				<button class="btn">Cancel</button>
 			</div>
 			
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
-				<%= select_tag "users", options_from_collection_for_select(@users, "id", "name"),class: "form-control" %>
+			<div class="col-sm-4 user-selection">
+				<%= select_tag "users", options_from_collection_for_select(@users, "id", "name"),class: "form-control",prompt: "Select User",id: 'user' %>
 				
 			</div>
 		</div>
@@ -19,18 +20,14 @@
 		<div class="row region-margin">
 			<div class="col-sm-12">
 				<div class="col-sm-4">
-					<%= select_tag "regions", options_from_collection_for_select(@select_region, "id", "region_name"),class: "form-control" %>
+					<%= select_tag "regions", options_from_collection_for_select(@select_region, "id", "region_name"),class: "form-control",id: "region_select",prompt: "Select Region" %>
 				</div>
 			</div>
 		</div>
 			<div class="col-md-12">
 				<div class="subject-info-box-1">
-					<select multiple class="form-control" id="lstBox1">
-						<option value="123">Superman</option>
-						<option value="456">Batman</option>
-						<option value="789">Spiderman</option>
-						<option value="654">Captain America</option>
-					</select>
+				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name"),class: "form-control",multiple: true,id: "lstBox1" %>
+					
 				</div>
 
 				<div class="subject-info-arrows text-center">
@@ -42,38 +39,12 @@
 				</div>
 
 				<div class="subject-info-box-2">
-					<label>Superheroes You Have Selected</label>
-					<select multiple class="form-control" id="lstBox2">
-						<option value="765">Nick Fury</option>
-						<option value="698">The Hulk</option>
-						<option value="856">Iron Man</option>
-					</select>
+					<%= select_tag "user_plants", options_from_collection_for_select(@user_plants, "id", "plant_name"),class: "form-control",multiple: true,id: "lstBox2" %>
 				</div>
 
 				<div class="clearfix"></div>
 			</div>
 		</div>
+	<% end %>
 	</div>
 	
-	<script>
-		
-        $('#btnRight').click(function (e) {
-            $('select').moveToListAndDelete('#lstBox1', '#lstBox2');
-            e.preventDefault();
-        });
-
-        $('#btnAllRight').click(function (e) {
-            $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
-            e.preventDefault();
-        });
-
-        $('#btnLeft').click(function (e) {
-            $('select').moveToListAndDelete('#lstBox2', '#lstBox1');
-            e.preventDefault();
-        });
-
-        $('#btnAllLeft').click(function (e) {
-            $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
-            e.preventDefault();
-        });
-    </script>

@@ -9,7 +9,15 @@ Rails.application.routes.draw do
   end
 
   resources :material_requirements
-  resources :plants
+  resources :plants do
+    collection do 
+      get :region_plants
+      post :assign_plants
+      post :remove_plants
+      get :user_plants
+    end
+  end
+  
   devise_scope :user do
       authenticated  do
         root to: 'visitors#index'

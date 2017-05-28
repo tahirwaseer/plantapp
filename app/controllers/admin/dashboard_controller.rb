@@ -5,7 +5,14 @@ class Admin::DashboardController < ApplicationController
       redirect_to root_path, :notice => "Access Denied"
     end
     @users = User.all
-    @select_region = Plant.all
+
+    @plants = @select_region = Plant.all
+    @user_plants = []
+    # @current_user_plants = current_user.plants
+  end
+
+  def show
+    
   end
 
   def new
@@ -18,5 +25,9 @@ class Admin::DashboardController < ApplicationController
   end
 
   def destroy
+  end
+
+  def region_selection
+    
   end
 end

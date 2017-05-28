@@ -61,6 +61,43 @@ class PlantsController < ApplicationController
     end
   end
 
+  def region_plants
+    if params[:region]  == "Select Region"
+      @plants= Plant.all      
+    else
+      @plants = Plant.where(region_name: params[:region])
+    end
+  end
+
+
+  def assign_plants
+    @user = User.find(params[:user])
+    if !@user.plant_ids.include?(params[:plants].to_i)
+      @user.plants << Plant.find(params[:plants])
+    end
+    
+    @user_plants = @user.plants
+    @plants = Plant.where.not(id: @user.plants.ids)
+  end
+
+  def remove_plants
+    @user = User.find(params[:user])
+    # binding.pry 
+
+    if @user.plant_ids.include?(params[:plants].to_i)
+      @user.plants.delete(Plant.find(params[:plants]).id)
+    end
+    
+    @user_plants = @user.plants
+    @plants = Plant.where.not(id: @user.plants.ids)
+  end
+
+  def user_plants
+    @user = User.find(params[:user])
+    @user_plants = @user.plants  
+    @plants = Plant.where.not(id: @user.plants.ids)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plant
