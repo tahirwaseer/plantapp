@@ -1,11 +1,10 @@
 $(document).ready(function() {
 
-	function select_region() {
-		
-	}
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
+		}else if(!$('#lstBox1 option:selected').val()){
+			alert("Select plant Before assignment")
 		}else{
 			$.ajax({
 			  url: "/plants/assign_plants",
@@ -20,14 +19,31 @@ $(document).ready(function() {
 	});
 
 	$('#btnAllRight').click(function (e) {
-	    $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
+		if ($('#user option:selected').val()=="") {
+			alert("Select User Before plant assignment")
+		}else{
+		var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+				$.ajax({
+					  url: "/plants/assign_plants",
+					  type: "POST",
+					  data: {
+					  	"plants" : _options,
+					  	"user" : $('#user option:selected').val()
+						}
+					});
+		}
+
+	    // $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
 	    e.preventDefault();
 	});
 
 	$('#btnLeft').click(function (e) {
 		if ($('#user option:selected').val()=="") {
-			alert("Select User Before plant assignment")
-		}else{
+			alert("Select User Before plant removal")
+		}else if(!$('#lstBox2 option:selected').val()){
+			alert("Select plant Before assignment")
+		}
+		else{
 			$.ajax({
 			  url: "/plants/remove_plants",
 			  type: "POST",
@@ -42,7 +58,21 @@ $(document).ready(function() {
 	});
 
 	$('#btnAllLeft').click(function (e) {
-	    $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
+		if ($('#user option:selected').val()=="") {
+			alert("Select User Before plant assignment")
+		}else{
+		var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+
+			$.ajax({
+			  url: "/plants/remove_plants",
+			  type: "POST",
+			 data: {
+			 			  	"plants" : _options,
+			 			  	"user" : $('#user option:selected').val()
+			 				}
+			});
+		}
+	    // $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
 	    e.preventDefault();
 	});
 

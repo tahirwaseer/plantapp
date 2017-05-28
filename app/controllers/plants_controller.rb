@@ -71,8 +71,13 @@ class PlantsController < ApplicationController
 
 
   def assign_plants
+    # binding.pry 
     @user = User.find(params[:user])
-    if !@user.plant_ids.include?(params[:plants].to_i)
+
+    if params[:plants].kind_of?(Array)
+      @user.plants << Plant.find(params[:plants])
+    else 
+      !@user.plant_ids.include?(params[:plants].to_i)
       @user.plants << Plant.find(params[:plants])
     end
     
@@ -81,10 +86,15 @@ class PlantsController < ApplicationController
   end
 
   def remove_plants
+    
     @user = User.find(params[:user])
-    # binding.pry 
-
-    if @user.plant_ids.include?(params[:plants].to_i)
+    
+    if params[:plants].kind_of?(Array)
+      @user.plants.delete_all
+    elsif !params[:plants]
+      @user.plants.delete_all
+    else
+      @user.plant_ids.include?(params[:plants].to_i)
       @user.plants.delete(Plant.find(params[:plants]).id)
     end
     
