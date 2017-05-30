@@ -33,10 +33,6 @@ GEM
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
       arel (~> 7.0)
-    activerecord-oracle_enhanced-adapter (1.7.11)
-      activerecord (~> 5.0.0)
-      arel (~> 7.1.4)
-      ruby-plsql (>= 0.5.0)
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -183,8 +179,6 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    ruby-oci8 (2.2.3)
-    ruby-plsql (0.6.0)
     rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -241,7 +235,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-oracle_enhanced-adapter
   better_errors
   binding_of_caller
   bootstrap-sass
@@ -262,7 +255,6 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   rails_layout
   rspec-rails
-  ruby-oci8
   sass-rails (~> 5.0)
   selenium-webdriver
   spring

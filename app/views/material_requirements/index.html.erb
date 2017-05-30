@@ -23,7 +23,7 @@
   <tbody>
     <% @material_requirements.each do |material_requirement| %>
       <tr>
-        <td><%= material_requirement.plant %></td>
+        <td><%= material_requirement.plant.plant_name %></td>
         <td><%= material_requirement.order_date %></td>
         <td><%= material_requirement.item_code %></td>
         <td><%= material_requirement.item_description %></td>
