@@ -1,16 +1,33 @@
-<div class="container">
-  <div class="row">
-    <h3>Users</h3>
-    <div class="column">
-      <table class="table">
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <%= render user %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<div class="row page-title">
+  <div class="col-xs-6">
+    <span class="title">Users - List</span>
   </div>
+  <div class="col-xs-6">
+    <%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary pull-right' %>
+  </div>
+  <div class="col-xs-12">
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-hover">
+      <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Effective Start Date</th>
+        <th>Effective End Date</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <%= render user %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
 </div>

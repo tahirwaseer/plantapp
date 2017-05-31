@@ -28,7 +28,7 @@ class MaterialRequirementsController < ApplicationController
 
     respond_to do |format|
       if @material_requirement.save
-        format.html { redirect_to @material_requirement, notice: 'Material requirement was successfully created.' }
+        format.html { redirect_to material_requirements_url, notice: 'Material requirement was successfully created.' }
         format.json { render :show, status: :created, location: @material_requirement }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MaterialRequirementsController < ApplicationController
   def update
     respond_to do |format|
       if @material_requirement.update(material_requirement_params)
-        format.html { redirect_to @material_requirement, notice: 'Material requirement was successfully updated.' }
+        format.html { redirect_to material_requirements_url, notice: 'Material requirement was successfully updated.' }
         format.json { render :show, status: :ok, location: @material_requirement }
       else
         format.html { render :edit }

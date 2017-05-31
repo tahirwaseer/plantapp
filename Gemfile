@@ -42,5 +42,5 @@ group :test do
 end
 
 
-gem 'ruby-oci8'
-gem 'activerecord-oracle_enhanced-adapter', :require => false
+# gem 'ruby-oci8'
+# gem 'activerecord-oracle_enhanced-adapter', :require => false

@@ -28,7 +28,7 @@ class PlantsController < ApplicationController
 
     respond_to do |format|
       if @plant.save
-        format.html { redirect_to @plant, notice: 'Plant was successfully created.' }
+        format.html { redirect_to plants_url, notice: 'Plant was successfully created.' }
         format.json { render :show, status: :created, location: @plant }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PlantsController < ApplicationController
   def update
     respond_to do |format|
       if @plant.update(plant_params)
-        format.html { redirect_to @plant, notice: 'Plant was successfully updated.' }
+        format.html { redirect_to plants_url, notice: 'Plant was successfully updated.' }
         format.json { render :show, status: :ok, location: @plant }
       else
         format.html { render :edit }

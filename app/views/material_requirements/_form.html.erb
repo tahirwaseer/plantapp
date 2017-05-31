@@ -1,72 +1,131 @@
-<%= form_for(material_requirement) do |f| %>
-  <% if material_requirement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(material_requirement.errors.count, "error") %> prohibited this material_requirement from being saved:</h2>
+<div class="row page-title">
+  <div class="col-xs-6">
+    <span class="title">Matirial Requirements - <%= material_requirement.persisted? ?  'Edit' : 'Add' %></span>
+  </div>
+  <div class="col-xs-12">
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(material_requirement) do |f| %>
+      <% if material_requirement.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(material_requirement.errors.count, "error") %> prohibited this material_requirement from being saved:</h2>
 
-      <ul>
-      <% material_requirement.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% material_requirement.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :plant_id %>
-    <%= f.text_field :plant_id %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :plant_id , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.select :plant_id, options_from_collection_for_select(Plant.active, :id, :plant_name, material_requirement.plant_id)%>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :order_date , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.date_select :order_date %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :order_date %>
-    <%= f.date_select :order_date %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :item_code , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :item_code , class: 'form-control'%>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :item_description , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_area :item_description , class: 'form-control'%>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :item_type , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :item_type , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :item_code %>
-    <%= f.text_field :item_code %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :item_type_description , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :item_type_description , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :item_description %>
-    <%= f.text_field :item_description %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :uom , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :uom , class: 'form-control'%>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :demand , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :demand , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :item_type %>
-    <%= f.text_field :item_type %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :receipts , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :receipts , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :item_type_description %>
-    <%= f.text_field :item_type_description %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :inv_on_hand , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :inv_on_hand , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :uom %>
-    <%= f.text_field :uom %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :inventory_run_out_time , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.datetime_select :inventory_run_out_time %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :demand %>
-    <%= f.number_field :demand %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="actions">
+            <%= f.submit class: 'btn btn-success' %>
+            <%= link_to 'Back', material_requirements_path, class: 'btn btn-default' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :receipts %>
-    <%= f.number_field :receipts %>
-  </div>
-
-  <div class="field">
-    <%= f.label :inv_on_hand %>
-    <%= f.number_field :inv_on_hand %>
-  </div>
-
-  <div class="field">
-    <%= f.label :inventory_run_out_time %>
-    <%= f.datetime_select :inventory_run_out_time %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

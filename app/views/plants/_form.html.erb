@@ -1,37 +1,69 @@
-<%= form_for(plant) do |f| %>
-  <% if plant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
+<div class="row page-title">
+  <div class="col-xs-6">
+    <span class="title">Plants - <%= plant.persisted? ?  'Edit' : 'Add' %></span>
+  </div>
+  <div class="col-xs-12">
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(plant) do |f| %>
+      <% if plant.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
 
-      <ul>
-      <% plant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% plant.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :region_name %>
-    <%= f.text_field :region_name %>
-  </div>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :plant_name , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :plant_name , class: 'form-control'%>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :plant_code , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :plant_code , class: 'form-control'%>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :plant_code %>
-    <%= f.text_field :plant_code %>
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :region_name , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :region_name , class: 'form-control'%>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :Active , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.check_box :Active %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="actions">
+            <%= f.submit class: 'btn btn-success' %>
+            <%= link_to 'Back', plants_path, class: 'btn btn-default' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :plant_name %>
-    <%= f.text_field :plant_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Active %>
-    <%= f.check_box :Active %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

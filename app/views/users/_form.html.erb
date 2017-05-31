@@ -1,0 +1,90 @@
+<div class="row page-title">
+  <div class="col-xs-6">
+    <span class="title">Users - <%= user.persisted? ?  'Edit' : 'Add' %></span>
+  </div>
+  <div class="col-xs-12">
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(user, url: user.persisted? ?  admin_user_path(user) : admin_users_path) do |f| %>
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :name , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :name , class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :email , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.email_field :email , class: 'form-control'%>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :effective_start_date , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.date_select :effective_start_date , class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :effective_end_date , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.date_select :effective_end_date , class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :password , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.text_field :password , class: 'form-control'%>
+          <% if user.persisted? %>
+          <span class="help-text">leave the password field empty if you don't want to update password!</span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3 col-xs-12 text-right">
+          <%= f.label :amin , class: 'control-label'%>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= f.check_box :admin %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="actions">
+            <%= f.submit class: 'btn btn-success' %>
+            <%= link_to 'Back', admin_users_path, class: 'btn btn-default' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

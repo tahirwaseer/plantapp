@@ -35,7 +35,7 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: transparent;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
@@ -80,3 +80,17 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+
+/*Layout styles*/
+main {
+  .page-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .title{
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+
+}
+  
