@@ -5,9 +5,11 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
 
 development:
   <<: *default
@@ -20,10 +22,21 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# On Heroku and other platform providers, you may have a full connection URL
+# available as an environment variable. For example:
+#
+#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#
+# You can use this database configuration with:
+#
+#   production:
+#     url: <%= ENV['DATABASE_URL'] %>
+#
 production:
   <<: *default
-  database: db/production.sqlite3
-
+  database: plantappv1_production
+  username: plantappv1
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
 # # Oracle/OCI 8i, 9, 10g
 # #
 # # Requires Ruby/OCI8:
