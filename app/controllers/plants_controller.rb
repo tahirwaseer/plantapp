@@ -62,7 +62,6 @@ class PlantsController < ApplicationController
   end
 
   def region_plants
-    # binding.pry
     if params[:user].blank?
       if params[:region]  == "Select Region"
         @plants= Plant.all      
@@ -79,7 +78,6 @@ class PlantsController < ApplicationController
     end
     # if !params[:user].blank? and params[:region]  != "Select Region"
     #   @plant_ids = User.find(params[:user]).plant_ids
-    #   binding.pry
     #   @plants = Plant.where.not(id: @plant_ids).where(region_name: params[:region])
     # elsif 
     #   @plants= Plant.all    
@@ -93,7 +91,6 @@ class PlantsController < ApplicationController
 
 
   def assign_plants
-    # binding.pry 
     @user = User.find(params[:user])
 
     if params[:plants].kind_of?(Array)
@@ -110,7 +107,6 @@ class PlantsController < ApplicationController
   def remove_plants
     
     @user = User.find(params[:user])
-    binding.pry
     if params[:plants].kind_of?(Array)
       @user.plants.delete_all
     elsif !params[:plants]
