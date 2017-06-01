@@ -8,6 +8,6 @@ class User < ApplicationRecord
 
   # check to see if a user is active or not and deny login if not
  def active_for_authentication?
-   super && effective_start_date.present? && effective_start_date.to_time.to_i <= Time.now.to_i && Time.now.to_i <= effective_end_date.present? && effective_end_date.to_time.to_i 
+   super && (admin? || (effective_start_date.present? && effective_start_date.to_time.to_i <= Time.now.to_i && Time.now.to_i <= effective_end_date.present? && effective_end_date.to_time.to_i ))
  end
 end
