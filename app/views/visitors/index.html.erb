@@ -5,7 +5,7 @@
 		
 		<div class="row">
 			<div class="col-sm-4 user-selection">
-				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name"),class: "form-control",id: "lstBox1" %>
+				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name",params[:plant]),class: "form-control listboxChange",id: "lstBox1",prompt: "Select Plant" %>
 				
 			</div>
 		</div>
