@@ -62,7 +62,7 @@
 
 
 set :application, 'plantapp'
-set :repo_url, 'git@bitbucket.org:waleedarshad/plantapp.git' # Edit this to match your repository
+set :repo_url, 'git@github.com:tahirwaseer/plantapp.git' # Edit this to match your repository
 set :branch, :master
 set :deploy_to, '/home/deploy/plantapp'
 set :pty, true
