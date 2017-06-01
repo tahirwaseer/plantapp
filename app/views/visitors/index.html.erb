@@ -5,7 +5,7 @@
 		
 		<div class="row">
 			<div class="col-sm-4 user-selection">
-				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name"),class: "form-control",id: "lstBox1" %>
+				<%= select_tag "plants", options_from_collection_for_select(@plants, "id", "plant_name",params[:plant]),class: "form-control listboxChange",id: "lstBox1",prompt: "Select Plant" %>
 				
 			</div>
 		</div>
@@ -14,7 +14,8 @@
 			<%@plant_with_material.each do |plant|%>
 			<% @material = plant.material_requirements %>
 			<%@material.each do |mat|%>
-			<table class="table">
+			<table class="table table-hover table-bordered">
+				<caption class="caption"><%= plant.plant_name.capitalize%> demand for <%= mat.order_date.strftime(" %m/%d/%Y")%></caption>
 			    <thead>
 			      <tr>
 			        <th>Item</th>

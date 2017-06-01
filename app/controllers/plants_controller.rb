@@ -110,7 +110,7 @@ class PlantsController < ApplicationController
   def remove_plants
     
     @user = User.find(params[:user])
-    
+    binding.pry
     if params[:plants].kind_of?(Array)
       @user.plants.delete_all
     elsif !params[:plants]

@@ -1,5 +1,11 @@
 $(document).on('turbolinks:load', function() {
 
+
+	$(".listboxChange").change(function() {
+		
+    window.location = "/?plant=" + $(this).val();
+	})
+
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
