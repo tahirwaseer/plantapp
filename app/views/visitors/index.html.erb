@@ -14,7 +14,8 @@
 			<%@plant_with_material.each do |plant|%>
 			<% @material = plant.material_requirements %>
 			<%@material.each do |mat|%>
-			<table class="table">
+			<table class="table table-hover table-bordered">
+				<caption class="caption"><%= plant.plant_name.capitalize%> demand for <%= mat.order_date.strftime(" %m/%d/%Y")%></caption>
 			    <thead>
 			      <tr>
 			        <th>Item</th>
