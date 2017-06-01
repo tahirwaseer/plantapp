@@ -62,11 +62,33 @@ class PlantsController < ApplicationController
   end
 
   def region_plants
-    if params[:region]  == "Select Region"
-      @plants= Plant.all      
+    # binding.pry
+    if params[:user].blank?
+      if params[:region]  == "Select Region"
+        @plants= Plant.all      
+      else
+        @plants = Plant.where(region_name: params[:region])
+      end
+    elsif params[:region]  == "Select Region" and params[:user].present?
+      plant_ids = User.find(params[:user]).plant_ids
+      @plants = Plant.where.not(id: plant_ids)
     else
-      @plants = Plant.where(region_name: params[:region])
+      plant_ids = User.find(params[:user]).plant_ids
+      @plants = Plant.where.not(id: plant_ids).where(region_name: params[:region])
+
     end
+    # if !params[:user].blank? and params[:region]  != "Select Region"
+    #   @plant_ids = User.find(params[:user]).plant_ids
+    #   binding.pry
+    #   @plants = Plant.where.not(id: @plant_ids).where(region_name: params[:region])
+    # elsif 
+    #   @plants= Plant.all    
+    # end
+    # if params[:region]  == "Select Region"
+    #   @plants= Plant.all      
+    # else
+    #   @plants = Plant.where(region_name: params[:region])
+    # end
   end
 
 
@@ -103,9 +125,20 @@ class PlantsController < ApplicationController
   end
 
   def user_plants
-    @user = User.find(params[:user])
-    @user_plants = @user.plants  
-    @plants = Plant.where.not(id: @user.plants.ids)
+    if params[:user].blank?
+      if params[:region] == "Select Region"
+        @plants = Plant.all
+        @user_plants = []
+      else
+        @plants = Plant.where(region_name: params[:region])
+        @user_plants = []
+      end
+    else
+      @user = User.find(params[:user])
+      @user_plants = @user.plants  
+      @plants = Plant.where.not(id: @user.plants.ids)
+    end
+    
   end
 
   private

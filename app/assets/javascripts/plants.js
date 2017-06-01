@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
 
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 	$('#btnLeft').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant removal")
-		}else if(!$('#lstBox2 option:selected').val()){
+		}else if($('#lstBox2 option:selected').val()==""){
 			alert("Select plant Before assignment")
 		}
 		else{
@@ -81,7 +81,9 @@ $(document).ready(function() {
 	  $.ajax({
 	    url: "/plants/user_plants",
 	    type: "GET",
-	    data: {"user" : $('#user option:selected').val()}
+	    data: {"user" : $('#user option:selected').val(),
+	  	"region" : $('#region_select option:selected').text()
+	  	}
 	  })
 	});1
 
@@ -91,7 +93,9 @@ $(document).ready(function() {
 	  $.ajax({
 	    url: "/plants/region_plants",
 	    type: "GET",
-	    data: {"region" : $('#region_select option:selected').text()}
+	    data: {"region" : $('#region_select option:selected').text(),
+	  	"user" : $('#user option:selected').val()
+	  	}
 	  })
 	});
 })
