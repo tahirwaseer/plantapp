@@ -4,7 +4,11 @@ class MaterialRequirementsController < ApplicationController
   # GET /material_requirements
   # GET /material_requirements.json
   def index
-    @plants = Plant.includes(:material_requirements)
+    if params[:plant].present?
+      @plants = Plant.where(id: params[:plant]).includes(:material_requirements)
+    else
+      @plants = Plant.includes(:material_requirements)
+    end
   end
 
   # GET /material_requirements/1

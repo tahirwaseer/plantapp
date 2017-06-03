@@ -6,6 +6,11 @@ $(document).on('turbolinks:load', function() {
     window.location = "/?plant=" + $(this).val();
 	})
 
+	$(".admin_plants_filter").change(function() {
+		
+    window.location = "/material_requirements?plant=" + $(this).val();
+	})
+
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")

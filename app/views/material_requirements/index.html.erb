@@ -10,6 +10,13 @@
   </div>
 </div>
 <div class="row">
+  <div class="col-sm-4 user-selection">
+    <%= select_tag "plants", options_from_collection_for_select(Plant.all, "id", "plant_name",params[:plant]),class: "form-control admin_plants_filter",id: "lstBox1",prompt: "Select Plant" %>
+    
+  </div>
+</div>
+<br>
+<div class="row">
   <div class="col-xs-12">
     <% @plants.each do |plant| %>
       <table class="table table-hover">
