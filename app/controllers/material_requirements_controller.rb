@@ -4,7 +4,7 @@ class MaterialRequirementsController < ApplicationController
   # GET /material_requirements
   # GET /material_requirements.json
   def index
-    @material_requirements = MaterialRequirement.all
+    @plants = Plant.includes(:material_requirements)
   end
 
   # GET /material_requirements/1

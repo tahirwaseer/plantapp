@@ -11,47 +11,50 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Plant</th>
-          <th>Order date</th>
-          <th>Item code</th>
-          <th>Item description</th>
-          <th>Item type</th>
-          <th>Item type description</th>
-          <th>Uom</th>
-          <th>Demand</th>
-          <th>Receipts</th>
-          <th>Inv on hand</th>
-          <th>Inventory run out time</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @material_requirements.each do |material_requirement| %>
+    <% @plants.each do |plant| %>
+      <table class="table table-hover">
+        <caption class="caption"><%= plant.plant_name%> demand </caption>
+        <thead>
           <tr>
-            <td><%= material_requirement.id %></td>
-            <td><%= material_requirement.plant.plant_name %></td>
-            <td><%= material_requirement.order_date %></td>
-            <td><%= material_requirement.item_code %></td>
-            <td><%= material_requirement.item_description %></td>
-            <td><%= material_requirement.item_type %></td>
-            <td><%= material_requirement.item_type_description %></td>
-            <td><%= material_requirement.uom %></td>
-            <td><%= material_requirement.demand %></td>
-            <td><%= material_requirement.receipts %></td>
-            <td><%= material_requirement.inv_on_hand %></td>
-            <td><%= material_requirement.inventory_run_out_time %></td>
-            <td>
-              <%= link_to 'Edit', edit_material_requirement_path(material_requirement) %> | 
-              <%= link_to 'Destroy', material_requirement, method: :delete, data: { confirm: 'Are you sure?' } %>    
-            </td>
+            <th>#</th>
+            <th>Plant</th>
+            <th>Order date</th>
+            <th>Item code</th>
+            <th>Item description</th>
+            <th>Item type</th>
+            <th>Item type description</th>
+            <th>Uom</th>
+            <th>Demand</th>
+            <th>Receipts</th>
+            <th>Inv on hand</th>
+            <th>Inventory run out time</th>
+            <th>Actions</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% plant.material_requirements.each do |material_requirement| %>
+            <tr style="background-color: <%= material_requirement.demand > (material_requirement.receipts + material_requirement.inv_on_hand) ? '#e85353' : ''%>">
+              <td><%= material_requirement.id %></td>
+              <td><%= material_requirement.plant.plant_name %></td>
+              <td><%= material_requirement.order_date %></td>
+              <td><%= material_requirement.item_code %></td>
+              <td><%= material_requirement.item_description %></td>
+              <td><%= material_requirement.item_type %></td>
+              <td><%= material_requirement.item_type_description %></td>
+              <td><%= material_requirement.uom %></td>
+              <td><%= material_requirement.demand %></td>
+              <td><%= material_requirement.receipts %></td>
+              <td><%= material_requirement.inv_on_hand %></td>
+              <td><%= material_requirement.inventory_run_out_time.strftime('%Y-%m-%d %I:%M:%I %p') %></td>
+              <td>
+                <%= link_to 'Edit', edit_material_requirement_path(material_requirement) %> | 
+                <%= link_to 'Destroy', material_requirement, method: :delete, data: { confirm: 'Are you sure?' } %>    
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
  </div>
 </div>

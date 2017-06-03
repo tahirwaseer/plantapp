@@ -27,13 +27,13 @@
 					    </thead>
 					    <tbody class="plant-body">
 					    	<% plant.material_requirements.order('inventory_run_out_time desc').each do |mat| %>
-						      <tr style="background-color: <%= mat.demand > (mat.receipts + mat.inv_on_hand) ? '#f23030' : 'transparent'%>">
+						      <tr style="background-color: <%= mat.demand > (mat.receipts + mat.inv_on_hand) ? '#e85353' : ''%>">
 						        <td><%= mat.item_code%></td>
 						        <td><%= mat.demand%></td>
 						        <td><%= mat.receipts%></td>
 						        <td><%= mat.inv_on_hand%></td>
 						        <td><%= mat.uom%></td>
-						        <td><%= mat.inventory_run_out_time%></td>
+						        <td><%= mat.inventory_run_out_time.strftime('%Y-%m-%d %I:%M:%I %p')%></td>
 
 
 						      </tr>
