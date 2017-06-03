@@ -4,21 +4,12 @@ class VisitorsController < ApplicationController
 			redirect_to '/admin'
 		else
 			@plants = current_user.plants
-			@plant_with_material = current_user.plants.includes(:material_requirements)
+
 
 			if params[:plant].present?
-				begin
-					@plants = current_user.plants
-				  @plant_with_material = current_user.plants.where(:id => params[:plant]).includes(:material_requirements)
-					
-				rescue 
-					@plants = current_user.plants
-				  @plant_with_material = @plants.includes(:material_requirements)
-
-				end
+				  @material_requirements = @plants.where(:id => params[:plant]).includes(:material_requirements)
 			else
-				@plants = current_user.plants
-				  @plant_with_material = @plants.includes(:material_requirements)
+				@material_requirements = @plants.includes(:material_requirements)
 			end
 
 		end

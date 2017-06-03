@@ -1,5 +1,4 @@
-<h3>Welcome</h3>
-
+	
 
 	<div class="container padd">
 		
@@ -9,40 +8,40 @@
 				
 			</div>
 		</div>
-
+		<br>
 		<div class="row">
-			<%@plant_with_material.each do |plant|%>
-			<% @material = plant.material_requirements %>
-			<%@material.each do |mat|%>
-			<table class="table table-hover table-bordered">
-				<caption class="caption"><%= plant.plant_name.capitalize%> demand for <%= mat.order_date.strftime(" %m/%d/%Y")%></caption>
-			    <thead>
-			      <tr>
-			        <th>Item</th>
-			        <th>Demand</th>
-			        <th>Receipt</th>
-			        <th>Inventry On Demand</th>
-			        <th>UOM</th>
-			        <th>Inventry Runout</th>
+			<div class="col-sm-12">
+				<%@material_requirements.each do |plant|%>
+					<table class="table table-hover table-bordered">
+						<caption class="caption"><%= plant.plant_name%> demand </caption>
+					    <thead>
+					      <tr>
+					        <th>Item</th>
+					        <th>Demand</th>
+					        <th>Receipt</th>
+					        <th>Inventry On Demand</th>
+					        <th>UOM</th>
+					        <th>Inventry Runout</th>
 
-			      </tr>
-			    </thead>
-			    <tbody class="plant-body">
-			      <tr>
-			        <td><%= mat.item_code%></td>
-			        <td><%= mat.demand%></td>
-			        <td><%= mat.receipts%></td>
-			        <td><%= mat.inv_on_hand%></td>
-			        <td><%= mat.uom%></td>
-			        <td><%= mat.inventory_run_out_time%></td>
+					      </tr>
+					    </thead>
+					    <tbody class="plant-body">
+					    	<% plant.material_requirements.order('inventory_run_out_time desc').each do |mat| %>
+						      <tr style="background-color: <%= mat.demand > (mat.receipts + mat.inv_on_hand) ? '#f23030' : 'transparent'%>">
+						        <td><%= mat.item_code%></td>
+						        <td><%= mat.demand%></td>
+						        <td><%= mat.receipts%></td>
+						        <td><%= mat.inv_on_hand%></td>
+						        <td><%= mat.uom%></td>
+						        <td><%= mat.inventory_run_out_time%></td>
 
 
-			      </tr>
-			      
-			    </tbody>
-			  </table>
-			  <% end %>
-			<% end %>
+						      </tr>
+					      	<% end %>
+					    </tbody>
+					  </table>
+				<% end %>
+			</div>
 		</div>
 
 	</div>
