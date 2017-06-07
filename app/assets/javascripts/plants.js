@@ -20,12 +20,14 @@ $(document).on('turbolinks:load', function() {
 		}else if(!$('#lstBox1 option:selected').val()){
 			alert("Select plant Before assignment")
 		}else{
+			var _options = $("select#lstBox1 option:selected").map(function() {return $(this).val();}).get();
 			$.ajax({
 			  url: "/plants/assign_plants",
 			  type: "POST",
 			  data: {
-			  	"plants" : $('#lstBox1 option:selected').val(),
-			  	"user" : $('#user option:selected').val()
+			  	"plants" : _options,
+			  	"user" : $('#user option:selected').val(),
+			  	"region": $('#region_select option:selected').val()
 				}
 			});
 		}
@@ -36,15 +38,20 @@ $(document).on('turbolinks:load', function() {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
 		}else{
-		var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+			var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+			if (_options!='') {
 				$.ajax({
 					  url: "/plants/assign_plants",
 					  type: "POST",
 					  data: {
 					  	"plants" : _options,
-					  	"user" : $('#user option:selected').val()
+					  	"user" : $('#user option:selected').val(),
+					  	"region": $('#region_select option:selected').val()
 						}
 					});
+			}else{
+				alert('Nothing selected!');
+			}
 		}
 
 	    // $('select').moveAllToListAndDelete('#lstBox1', '#lstBox2');
@@ -54,20 +61,20 @@ $(document).on('turbolinks:load', function() {
 	$('#btnLeft').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant removal")
-		}else if($('#lstBox2 option:selected').val()==""){
-			alert("Select plant Before assignment")
-		}
-		else{
+		}else if(!$('#lstBox2 option:selected').val()){
+			alert("Select plant Before plant removal")
+		}else{
+			var selected_plants = $('#lstBox2 option:selected').map(function() {return $(this).val();}).get();
 			$.ajax({
 			  url: "/plants/remove_plants",
 			  type: "POST",
 			 data: {
-			 			  	"plants" : $('#lstBox2 option:selected').val(),
-			 			  	"user" : $('#user option:selected').val()
+			 			  	"plants" : selected_plants,
+			 			  	"user" : $('#user option:selected').val(),
+			 			  	"region": $('#region_select option:selected').val()
 			 				}
 			});
 		}
-	    // $('select').moveToListAndDelete('#lstBox2', '#lstBox1');
 	    e.preventDefault();
 	});
 
@@ -75,31 +82,43 @@ $(document).on('turbolinks:load', function() {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
 		}else{
-		var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+			var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
 
-			$.ajax({
-			  url: "/plants/remove_plants",
-			  type: "POST",
-			 data: {
-			 			  	"plants" : _options,
-			 			  	"user" : $('#user option:selected').val()
-			 				}
-			});
+			if (_options!='') {
+				$.ajax({
+				  url: "/plants/remove_plants",
+				  type: "POST",
+				 data: {
+				 			  	"plants" : _options,
+				 			  	"user" : $('#user option:selected').val(),
+				 			  	"region": $('#region_select option:selected').val()
+				 				}
+				});
+			}else{
+				alert('Nothing selected!');
+			}
 		}
 	    // $('select').moveAllToListAndDelete('#lstBox2', '#lstBox1');
 	    e.preventDefault();
 	});
 
-
+	// Preload plants based on current selections
+	$.ajax({
+	    url: "/plants/region_plants",
+	    type: "GET",
+	    data: {"region" : $('#region_select option:selected').val(),
+	  	"user" : $('#user option:selected').val()
+	  	}
+	  });
 	$("#user").change(function(){
 	  $.ajax({
 	    url: "/plants/user_plants",
 	    type: "GET",
 	    data: {"user" : $('#user option:selected').val(),
-	  	"region" : $('#region_select option:selected').text()
+	  	"region" : $('#region_select option:selected').val()
 	  	}
 	  })
-	});1
+	});
 
 	$('#region_select').change(function(){
 	  $.ajax({

@@ -4,6 +4,7 @@ class VisitorsController < ApplicationController
 			redirect_to '/admin'
 		else
 			@plants = current_user.plants
+    		@last_refresh = Time.now().strftime("%Y-%m-%d %H:%M %p")
 
 			if params[:date].nil?
 		      filter_date = Date.today.strftime("%Y-%m-%d")

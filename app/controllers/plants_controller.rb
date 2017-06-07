@@ -63,6 +63,7 @@ class PlantsController < ApplicationController
   end
 
   def region_plants
+    user = User.find(params[:user]) unless params[:user].nil?
     if params[:user].blank?
       if params[:region]  == "Select Region"
         @plants= Plant.all      
@@ -70,30 +71,18 @@ class PlantsController < ApplicationController
         @plants = Plant.where(region_id: params[:region])
       end
     elsif params[:region]  == "Select Region" and params[:user].present?
-      plant_ids = User.find(params[:user]).plant_ids
+      plant_ids = user.plant_ids
       @plants = Plant.where.not(id: plant_ids)
     else
-      plant_ids = User.find(params[:user]).plant_ids
-      @plants = Plant.where.not(id: plant_ids).where(region_id: params[:region])
-
+      plant_ids = user.plant_ids
+      @plants = Plant.where(region_id: params[:region]).where.not(id: plant_ids)
     end
-    # if !params[:user].blank? and params[:region]  != "Select Region"
-    #   @plant_ids = User.find(params[:user]).plant_ids
-    #   @plants = Plant.where.not(id: @plant_ids).where(region_name: params[:region])
-    # elsif 
-    #   @plants= Plant.all    
-    # end
-    # if params[:region]  == "Select Region"
-    #   @plants= Plant.all      
-    # else
-    #   @plants = Plant.where(region_name: params[:region])
-    # end
+    @user_plants = user.plants rescue []
   end
 
 
   def assign_plants
     @user = User.find(params[:user])
-
     if params[:plants].kind_of?(Array)
       @user.plants << Plant.find(params[:plants])
     else 
@@ -102,23 +91,32 @@ class PlantsController < ApplicationController
     end
     
     @user_plants = @user.plants
-    @plants = Plant.where.not(id: @user.plants.ids)
+    if params[:region].blank?
+      @plants = Plant.where.not(id: @user.plants.ids)
+    else
+      @plants = Plant.where(region_id: params[:region]).where.not(id: @user.plants.ids)
+    end
   end
 
   def remove_plants
-    
     @user = User.find(params[:user])
     if params[:plants].kind_of?(Array)
-      @user.plants.delete_all
+      rm_ids = @user.plants.where(id: params[:plants])
+      @user.plants.delete(rm_ids)
     elsif !params[:plants]
-      @user.plants.delete_all
+      rm_ids = @user.plants
+      @user.plants.delete(rm_ids)
     else
       @user.plant_ids.include?(params[:plants].to_i)
-      @user.plants.delete(Plant.find(params[:plants]).id)
+      @user.plants.delete(Plant.find(params[:plants]))
     end
     
     @user_plants = @user.plants
-    @plants = Plant.where.not(id: @user.plants.ids)
+    if params[:region].blank?
+      @plants = Plant.where.not(id: @user.plants.ids)
+    else
+      @plants = Plant.where(region_id: params[:region]).where.not(id: @user.plants.ids)
+    end
   end
 
   def user_plants
@@ -127,7 +125,7 @@ class PlantsController < ApplicationController
         @plants = Plant.all
         @user_plants = []
       else
-        @plants = Plant.where(region_name: params[:region])
+        @plants = Plant.where(region_id: params[:region])
         @user_plants = []
       end
     else

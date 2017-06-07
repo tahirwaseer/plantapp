@@ -5,6 +5,7 @@ class MaterialRequirementsController < ApplicationController
   # GET /material_requirements
   # GET /material_requirements.json
   def index
+    @last_refresh = Time.now().strftime("%Y-%m-%d %H:%M %p")
     if params[:date].nil?
       filter_date = Date.today.strftime("%Y-%m-%d")
       @fdate = Date.strptime(filter_date, "%Y-%m-%d")
