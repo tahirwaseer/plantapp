@@ -24,7 +24,7 @@
       </thead>
 
       <tbody>
-        <% @plants.each do |plant| %>
+        <% @plants.order(:plant_name).each do |plant| %>
           <tr>
             <td><%= plant.id %></td>
             <td><%= link_to plant.plant_name, edit_plant_path(plant) %></td>
