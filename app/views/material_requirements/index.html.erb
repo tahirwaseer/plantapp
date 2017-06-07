@@ -40,7 +40,6 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Plant</th>
               <th>Order date</th>
               <th>Item code</th>
               <th>Item description</th>
@@ -62,7 +61,6 @@
               <% out_of_stock = material_requirement.demand > (material_requirement.receipts + material_requirement.inv_on_hand) %>
               <tr class="<%= params[:only_red]== 'true' ? (out_of_stock ? '' : 'hidden') : ''%>" style="background-color: <%=  out_of_stock ? '#e85353' : ''%>">
                 <td><%= material_requirement.id %></td>
-                <td><%= material_requirement.plant.plant_name %></td>
                 <td><%= material_requirement.order_date %></td>
                 <td><%= material_requirement.item_code %></td>
                 <td><%= material_requirement.item_description %></td>
