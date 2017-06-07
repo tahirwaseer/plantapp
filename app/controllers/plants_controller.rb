@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
   before_action :check_admin
 
-  skip_before_action :verify_authenticity_token, only: [:user_plants, :assign_plants, :remove_plants, :region_plants]
+  # skip_before_action :verify_authenticity_token, only: [:user_plants, :assign_plants, :remove_plants, :region_plants]
 
   # GET /plants
   # GET /plants.json
