@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :regions
   namespace :admin do
     get 'dashboard/index'
   end

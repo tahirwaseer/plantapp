@@ -6,10 +6,13 @@ $(document).on('turbolinks:load', function() {
     window.location = "/?plant=" + $(this).val();
 	})
 
-	$(".admin_plants_filter").change(function() {
-		
-    window.location = "/material_requirements?plant=" + $(this).val();
+	$("#filter_matirial_requiements").click(function() {
+		var date = $('#filter_date__1i').val()+'-'+$('#filter_date__2i').val()+'-'+$('#filter_date__3i').val();
+		var item_type = $('.material_requirements_item_type_filter').val();
+		var only_red = $('.material_requirements_only_red_filter').is(':checked');
+    	window.location = "/material_requirements?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
 	})
+
 
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
@@ -99,12 +102,10 @@ $(document).on('turbolinks:load', function() {
 	});1
 
 	$('#region_select').change(function(){
-		var text= $('#region_select option:selected').text()
-		console.log("//$('#region_select option:selected').text()",$('#region_select option:selected').text())
 	  $.ajax({
 	    url: "/plants/region_plants",
 	    type: "GET",
-	    data: {"region" : $('#region_select option:selected').text(),
+	    data: {"region" : $('#region_select option:selected').val(),
 	  	"user" : $('#user option:selected').val()
 	  	}
 	  })

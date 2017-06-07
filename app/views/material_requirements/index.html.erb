@@ -10,58 +10,77 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4 user-selection">
-    <%= select_tag "plants", options_from_collection_for_select(Plant.all, "id", "plant_name",params[:plant]),class: "form-control admin_plants_filter",id: "lstBox1",prompt: "Select Plant" %>
-    
+  <div class="col-sm-3 user-selection">
+    <%= select_tag "plants", options_from_collection_for_select(Plant.all.order(:plant_name), "id", "plant_name",@plants.map{|p| p.id}),class: "form-control material_requirements_plants_filter",prompt: 'All', multiple: true %>
+  </div>
+  <div class="col-sm-3">
+    <label>Order Date</label><br>
+    <%= date_select("filter_date","", :default => @fdate,class: 'material_requirements_date_filter')%>
+  </div>
+  <div class="col-sm-2">
+    <label>Item Type</label><br>
+    <%= select_tag "item_type_filter", options_from_collection_for_select(MaterialRequirement.select(:item_type).distinct, "item_type", "item_type",params[:item_type]),class: "material_requirements_item_type_filter",prompt: 'Select Plant Type' %>
+  </div>
+  <div class="col-sm-1">
+    <label for="only_red">Show Only Red</label>
+    <%= check_box_tag(:only_red, params[:only_red],params[:only_red]== 'true' ? true : false,class: 'material_requirements_only_red_filter') %>
+  </div>
+  <div class="col-sm-2">
+    <button id="filter_matirial_requiements" class="btn btn-info">Filter</button>
   </div>
 </div>
 <br>
 <div class="row">
   <div class="col-xs-12">
-    <% @plants.each do |plant| %>
-      <table class="table table-hover">
-        <caption class="caption"><%= plant.plant_name%> demand </caption>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Plant</th>
-            <th>Order date</th>
-            <th>Item code</th>
-            <th>Item description</th>
-            <th>Item type</th>
-            <th>Item type description</th>
-            <th>Uom</th>
-            <th>Demand</th>
-            <th>Receipts</th>
-            <th>Inv on hand</th>
-            <th>Inventory run out time</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% plant.material_requirements.each do |material_requirement| %>
-            <tr style="background-color: <%= material_requirement.demand > (material_requirement.receipts + material_requirement.inv_on_hand) ? '#e85353' : ''%>">
-              <td><%= material_requirement.id %></td>
-              <td><%= material_requirement.plant.plant_name %></td>
-              <td><%= material_requirement.order_date %></td>
-              <td><%= material_requirement.item_code %></td>
-              <td><%= material_requirement.item_description %></td>
-              <td><%= material_requirement.item_type %></td>
-              <td><%= material_requirement.item_type_description %></td>
-              <td><%= material_requirement.uom %></td>
-              <td><%= material_requirement.demand %></td>
-              <td><%= material_requirement.receipts %></td>
-              <td><%= material_requirement.inv_on_hand %></td>
-              <td><%= material_requirement.inventory_run_out_time.strftime('%Y-%m-%d %I:%M:%I %p') %></td>
-              <td>
-                <%= link_to 'Edit', edit_material_requirement_path(material_requirement) %> | 
-                <%= link_to 'Destroy', material_requirement, method: :delete, data: { confirm: 'Are you sure?' } %>    
-              </td>
+    <% @plants.order(:plant_name).each do |plant| %>
+      <%- unless plant.material_requirements.blank? %>
+        <table class="table table-hover">
+          <caption class="caption"><%= plant.plant_name%> demand for <%= @fdate %></caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Plant</th>
+              <th>Order date</th>
+              <th>Item code</th>
+              <th>Item description</th>
+              <th>Item type</th>
+              <th>Item type description</th>
+              <th>Uom</th>
+              <th>Demand</th>
+              <th>Receipts</th>
+              <th>Inv on hand</th>
+              <th>Inventory run out time</th>
+              <th>Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            <% material_requirements = params[:item_type].blank? ? plant.material_requirements.where(order_date: @fdate) : plant.material_requirements.where(order_date: @fdate).where(item_type: params[:item_type])
+            %>
+            <% material_requirements.each do |material_requirement| %>
+              <% out_of_stock = material_requirement.demand > (material_requirement.receipts + material_requirement.inv_on_hand) %>
+              <tr class="<%= params[:only_red]== 'true' ? (out_of_stock ? '' : 'hidden') : ''%>" style="background-color: <%=  out_of_stock ? '#e85353' : ''%>">
+                <td><%= material_requirement.id %></td>
+                <td><%= material_requirement.plant.plant_name %></td>
+                <td><%= material_requirement.order_date %></td>
+                <td><%= material_requirement.item_code %></td>
+                <td><%= material_requirement.item_description %></td>
+                <td><%= material_requirement.item_type %></td>
+                <td><%= material_requirement.item_type_description %></td>
+                <td><%= material_requirement.uom %></td>
+                <td><%= material_requirement.demand %></td>
+                <td><%= material_requirement.receipts %></td>
+                <td><%= material_requirement.inv_on_hand %></td>
+                <td><%= material_requirement.inventory_run_out_time.strftime('%Y-%m-%d %I:%M:%I %p') %></td>
+                <td>
+                  <%= link_to 'Edit', edit_material_requirement_path(material_requirement) %> | 
+                  <%= link_to 'Destroy', material_requirement, method: :delete, data: { confirm: 'Are you sure?' } %>    
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <%- end %>
     <% end %>
  </div>
 </div>

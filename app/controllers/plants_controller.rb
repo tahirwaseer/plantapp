@@ -66,14 +66,14 @@ class PlantsController < ApplicationController
       if params[:region]  == "Select Region"
         @plants= Plant.all      
       else
-        @plants = Plant.where(region_name: params[:region])
+        @plants = Plant.where(region_id: params[:region])
       end
     elsif params[:region]  == "Select Region" and params[:user].present?
       plant_ids = User.find(params[:user]).plant_ids
       @plants = Plant.where.not(id: plant_ids)
     else
       plant_ids = User.find(params[:user]).plant_ids
-      @plants = Plant.where.not(id: plant_ids).where(region_name: params[:region])
+      @plants = Plant.where.not(id: plant_ids).where(region_id: params[:region])
 
     end
     # if !params[:user].blank? and params[:region]  != "Select Region"
@@ -145,6 +145,6 @@ class PlantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plant_params
-      params.require(:plant).permit(:region_name, :plant_code, :plant_name, :Active)
+      params.require(:plant).permit(:region_id, :plant_code, :plant_name, :Active)
     end
 end

@@ -27,7 +27,7 @@
 		<div class="row region-margin">
 			<div class="col-sm-12">
 				<div class="col-sm-4">
-					<%= select_tag "regions", options_from_collection_for_select(@select_region, "id", "region_name"),class: "form-control",id: "region_select",prompt: "Select Region" %>
+					<%= select_tag "regions", options_from_collection_for_select(Region.all, "id", "name"),class: "form-control",id: "region_select",prompt: "Select Region" %>
 				</div>
 			</div>
 		</div>

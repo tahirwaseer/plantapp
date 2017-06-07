@@ -62,7 +62,7 @@
           <%= f.label :password , class: 'control-label'%>
         </div>
         <div class="col-md-6 col-xs-12">
-          <%= f.text_field :password , class: 'form-control'%>
+          <%= f.password_field :password , class: 'form-control'%>
           <% if user.persisted? %>
           <span class="help-text">leave the password field empty if you don't want to update password!</span>
           <% end %>

@@ -4,7 +4,7 @@ class Admin::DashboardController < ApplicationController
     if !current_user.admin?
       redirect_to root_path, :notice => "Access Denied"
     end
-    @users = User.normal_users
+    @users = User.normal_users.active
 
     @plants = @select_region = Plant.all
     @user_plants = []

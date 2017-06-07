@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525150552) do
+ActiveRecord::Schema.define(version: 20170606225918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,12 +33,13 @@ ActiveRecord::Schema.define(version: 20170525150552) do
   end
 
   create_table "plants", force: :cascade do |t|
-    t.string   "region_name"
     t.string   "plant_code"
     t.string   "plant_name"
     t.boolean  "Active"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "region_id"
+    t.index ["region_id"], name: "index_plants_on_region_id", using: :btree
   end
 
   create_table "plants_users", id: false, force: :cascade do |t|
@@ -46,6 +47,12 @@ ActiveRecord::Schema.define(version: 20170525150552) do
     t.integer "plant_id", null: false
     t.index ["plant_id", "user_id"], name: "index_plants_users_on_plant_id_and_user_id", using: :btree
     t.index ["user_id", "plant_id"], name: "index_plants_users_on_user_id_and_plant_id", using: :btree
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +77,5 @@ ActiveRecord::Schema.define(version: 20170525150552) do
   end
 
   add_foreign_key "material_requirements", "plants"
+  add_foreign_key "plants", "regions"
 end
