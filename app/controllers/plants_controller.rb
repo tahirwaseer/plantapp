@@ -3,7 +3,7 @@ class PlantsController < ApplicationController
   before_action :check_admin
 
 
-  skip_before_action :verify_authenticity_token, if: :json_request?
+  skip_before_action :verify_authenticity_token, if: :xhr_request?
 
   # GET /plants
   # GET /plants.json
@@ -155,8 +155,8 @@ class PlantsController < ApplicationController
       end
     end
 
-    def json_request? 
-      request.format.json?
+    def xhr_request? 
+      request.xhr?
     end
 
 end
