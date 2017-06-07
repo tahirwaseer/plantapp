@@ -1,5 +1,6 @@
 class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
   # GET /plants
   # GET /plants.json
@@ -146,5 +147,10 @@ class PlantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def plant_params
       params.require(:plant).permit(:region_id, :plant_code, :plant_name, :Active)
+    end
+    def check_admin
+      unless current_user.admin?
+        redirect_to '/', :alert => "Access denied."
+      end
     end
 end

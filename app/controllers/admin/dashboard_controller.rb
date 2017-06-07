@@ -1,5 +1,6 @@
 class Admin::DashboardController < ApplicationController
   before_filter :authenticate_user!
+  before_action :check_admin
   def index
     if !current_user.admin?
       redirect_to root_path, :notice => "Access Denied"
@@ -29,5 +30,11 @@ class Admin::DashboardController < ApplicationController
 
   def region_selection
     
+  end
+
+  def check_admin
+      unless current_user.admin?
+        redirect_to '/', :alert => "Access denied."
+      end
   end
 end

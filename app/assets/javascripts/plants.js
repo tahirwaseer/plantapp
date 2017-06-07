@@ -10,7 +10,7 @@ $(document).on('turbolinks:load', function() {
 		var date = $('#filter_date__1i').val()+'-'+$('#filter_date__2i').val()+'-'+$('#filter_date__3i').val();
 		var item_type = $('.material_requirements_item_type_filter').val();
 		var only_red = $('.material_requirements_only_red_filter').is(':checked');
-    	window.location = "/material_requirements?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
+    	window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
 	})
 
 

@@ -1,5 +1,6 @@
 class MaterialRequirementsController < ApplicationController
   before_action :set_material_requirement, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
   # GET /material_requirements
   # GET /material_requirements.json
@@ -82,5 +83,10 @@ class MaterialRequirementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_requirement_params
       params.require(:material_requirement).permit(:plant_id, :order_date, :item_code, :item_description, :item_type, :item_type_description, :uom, :demand, :receipts, :inv_on_hand, :inventory_run_out_time)
+    end
+    def check_admin
+      unless current_user.admin?
+        redirect_to '/', :alert => "Access denied."
+      end
     end
 end

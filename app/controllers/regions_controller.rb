@@ -1,5 +1,6 @@
 class RegionsController < ApplicationController
   before_action :set_region, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
   # GET /regions
   # GET /regions.json
@@ -70,5 +71,11 @@ class RegionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def region_params
       params.require(:region).permit(:name)
+    end
+
+    def check_admin
+      unless current_user.admin?
+        redirect_to '/', :alert => "Access denied."
+      end
     end
 end

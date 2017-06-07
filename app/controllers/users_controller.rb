@@ -79,7 +79,7 @@ class UsersController < ApplicationController
 
     def check_admin
       unless current_user.admin?
-        redirect_to :back, :alert => "Access denied."
+        redirect_to '/', :alert => "Access denied."
       end
     end
 end
