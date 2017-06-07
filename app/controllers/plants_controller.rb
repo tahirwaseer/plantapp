@@ -2,6 +2,9 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
   before_action :check_admin
 
+
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   # GET /plants
   # GET /plants.json
   def index
@@ -151,4 +154,9 @@ class PlantsController < ApplicationController
         redirect_to '/', :alert => "Access denied."
       end
     end
+
+    def json_request? 
+      request.format.json?
+    end
+
 end
