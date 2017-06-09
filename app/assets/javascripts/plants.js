@@ -5,6 +5,8 @@ $(document).on('turbolinks:load', function() {
 	    }
 	});
 
+	$('.selectbox').select2({tags: true});
+
 	$(".listboxChange").change(function() {
 		
     window.location = "/?plant=" + $(this).val();
@@ -14,6 +16,7 @@ $(document).on('turbolinks:load', function() {
 		var date = $('#filter_date__1i').val()+'-'+$('#filter_date__2i').val()+'-'+$('#filter_date__3i').val();
 		var item_type = $('.material_requirements_item_type_filter').val();
 		var only_red = $('.material_requirements_only_red_filter').is(':checked');
+		console.log($('.material_requirements_plants_filter').select2().val());
     	window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
 	})
 
@@ -86,7 +89,7 @@ $(document).on('turbolinks:load', function() {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
 		}else{
-			var _options = $("select#lstBox1 option").map(function() {return $(this).val();}).get();
+			var _options = $("select#lstBox2 option").map(function() {return $(this).val();}).get();
 
 			if (_options!='') {
 				$.ajax({

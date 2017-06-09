@@ -15,9 +15,9 @@ class MaterialRequirementsController < ApplicationController
 
     if params[:plants].present? 
       plants_ids = params[:plants].split(',')
-      @plants = Plant.where(id: plants_ids).includes(:material_requirements)
+      @plants = Plant.active.where(id: plants_ids).includes(:material_requirements)
     else
-      @plants = Plant.includes(:material_requirements)
+      @plants = Plant.active.includes(:material_requirements)
     end
   end
 

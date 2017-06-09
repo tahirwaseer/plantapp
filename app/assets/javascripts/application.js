@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.selectlistactions.js 
+//= require select2
 //= require_tree .

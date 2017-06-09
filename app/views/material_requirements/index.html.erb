@@ -11,7 +11,8 @@
 </div>
 <div class="row">
   <div class="col-sm-3 user-selection">
-    <%= select_tag "plants", options_from_collection_for_select(Plant.all.order(:plant_name), "id", "plant_name",@plants.map{|p| p.id}),class: "form-control material_requirements_plants_filter",prompt: 'All Plants', multiple: true %>
+    <label>Plants</label><br>
+    <%= select_tag "plants", options_from_collection_for_select(Plant.active.order(:plant_name), "id", "plant_name",@plants.map{|p| p.id}),class: "form-control selectbox material_requirements_plants_filter", multiple: true %>
   </div>
   <div class="col-sm-3">
     <label>Order Date</label><br>
@@ -57,7 +58,7 @@
           <tbody>
             <% material_requirements = params[:item_type].blank? ? plant.material_requirements.where(order_date: @fdate) : plant.material_requirements.where(order_date: @fdate).where(item_type: params[:item_type])
             %>
-            <% material_requirements.order('inventory_run_out_time desc').each do |material_requirement| %>
+            <% material_requirements.order('inventory_run_out_time').each do |material_requirement| %>
               <% out_of_stock = material_requirement.demand > (material_requirement.receipts + material_requirement.inv_on_hand) %>
               <tr class="<%= params[:only_red]== 'true' ? (out_of_stock ? '' : 'hidden') : ''%>" style="background-color: <%=  out_of_stock ? '#e85353' : ''%>">
                 <td><%= material_requirement.id %></td>
