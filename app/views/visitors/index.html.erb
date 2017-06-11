@@ -28,8 +28,10 @@
 			<div class="col-sm-12">
     			<p class="text-right">Last Refresh Time: <%= @last_refresh %></p>
 				<%@material_requirements.each do |plant|%>
+  					<div class="in-page-header">
+  						<h4 class=""><%= plant.plant_name%> demand for <%= @fdate %></h4>
+  					</div>
 					<table class="table table-hover table-bordered">
-      					<caption class="caption"><%= plant.plant_name%> demand for <%= @fdate %></caption>
 						<thead>
 					      <tr>
 					        <th>Item</th>

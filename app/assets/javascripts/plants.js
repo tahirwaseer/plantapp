@@ -5,8 +5,7 @@ $(document).on('turbolinks:load', function() {
 	    }
 	});
 
-	$('.selectbox').select2({tags: true});
-
+	$('.selectbox').SumoSelect({placeholder: 'Select'});
 	$(".listboxChange").change(function() {
 		
     window.location = "/?plant=" + $(this).val();
@@ -16,8 +15,7 @@ $(document).on('turbolinks:load', function() {
 		var date = $('#filter_date__1i').val()+'-'+$('#filter_date__2i').val()+'-'+$('#filter_date__3i').val();
 		var item_type = $('.material_requirements_item_type_filter').val();
 		var only_red = $('.material_requirements_only_red_filter').is(':checked');
-		console.log($('.material_requirements_plants_filter').select2().val());
-    	window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
+		window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
 	})
 
 
