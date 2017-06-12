@@ -47,7 +47,7 @@
 					    	<% material_requirements = params[:item_type].blank? ? plant.material_requirements.where(order_date: @fdate) : plant.material_requirements.where(order_date: @fdate).where(item_type: params[:item_type])
 				            %>
 				            <% material_requirements.order('inventory_run_out_time').each do |mat| %>
-				              <% out_of_stock = mat.demand > (mat.receipts + mat.inv_on_hand) %>
+				              <% out_of_stock = mat.demand > (mat.receipts + mat.inv_on_hand) rescue false %>
 				              <tr class="<%= params[:only_red]== 'true' ? (out_of_stock ? '' : 'hidden') : ''%>" style="background-color: <%=  out_of_stock ? '#e85353' : ''%>">
                 		        <td><%= mat.item_code%></td>
 						        <td><%= mat.demand%></td>
