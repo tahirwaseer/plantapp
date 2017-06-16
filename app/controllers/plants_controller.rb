@@ -146,7 +146,7 @@ class PlantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plant_params
-      params.require(:plant).permit(:region_id, :plant_code, :plant_name, :Active)
+      params.require(:plant).permit(:region_id, :plant_code, :plant_name, :active)
     end
     def check_admin
       unless current_user.admin?

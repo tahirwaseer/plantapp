@@ -30,7 +30,7 @@
             <td><%= link_to plant.plant_name, edit_plant_path(plant) %></td>
             <td><%= plant.plant_code %></td>
             <td><%= plant.region.name rescue '' %></td>
-            <td><%= plant.Active %></td>
+            <td><%= plant.active %></td>
             <td>
               <%#= link_to 'Show', plant %>
               <%= link_to 'Edit', edit_plant_path(plant) %> |

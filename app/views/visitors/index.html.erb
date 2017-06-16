@@ -13,7 +13,7 @@
 		  </div>
 		  <div class="col-sm-2">
 		    <label>Item Type</label><br>
-		    <%= select_tag "item_type_filter", options_from_collection_for_select(MaterialRequirement.select(:item_type).distinct, "item_type", "item_type",params[:item_type]),class: "material_requirements_item_type_filter",prompt: 'Select Plant Type' %>
+		    <%= select_tag "item_type_filter", options_from_collection_for_select(MaterialRequirement.select(:item_type).distinct, "item_type", "item_type",params[:item_type]),class: "material_requirements_item_type_filter",prompt: 'Select Item Type' %>
 		  </div>
 		  <div class="col-sm-2">
 		    <label for="only_red">Show Only Red</label><br>
@@ -37,9 +37,9 @@
 					        <th>Item</th>
 					        <th>Demand</th>
 					        <th>Receipt</th>
-					        <th>Inventry On Demand</th>
+					        <th>Onhand</th>
 					        <th>UOM</th>
-					        <th>Inventry Runout</th>
+					        <th>Inventory Runout Time</th>
 
 					      </tr>
 					    </thead>

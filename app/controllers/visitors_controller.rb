@@ -12,7 +12,7 @@ class VisitorsController < ApplicationController
 		    else
 		      @fdate = Date.strptime(params[:date], "%Y-%m-%d")
 		    end
-		    @selected = []
+		    @selected = @plants
 			if params[:plants].present?
       			plants_ids = params[:plants].split(',')
 
