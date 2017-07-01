@@ -15,13 +15,15 @@ $(document).on('turbolinks:load', function() {
 		var item_type = $('.material_requirements_item_type_filter').val();
 		var only_red = $('.material_requirements_only_red_filter').is(':checked');
 		window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;
-	})
+	});
+	$('.datepicker').datepicker({format: 'yyyy-mm-dd'});
 	// On change of any input field in matirial requirements page filter automatically
-	$('.selectbox').SumoSelect({placeholder: 'Select', selectAll: true});
-	$('.SumoSelect .options li').bind('click.check', function(event) {
+	$('.material_requirements_plants_filter').SumoSelect({placeholder: 'Select', selectAll: true});
+	$('.selectbox').SumoSelect({placeholder: 'Select'});
+	$('.sumo_plants .options li').bind('click.check', function(event) {
 	    filterRequirements();
 	})
-	$('.mr-date-filter select').on('change',function(e){
+	$('.mr-date-filter').on('change',function(e){
 		filterRequirements();
 	});
 	$('.material_requirements_item_type_filter').on('change', function(event){
@@ -30,7 +32,7 @@ $(document).on('turbolinks:load', function() {
 	$('.material_requirements_only_red_filter').on('change', function(event){
 		filterRequirements();
 	});
-	
+
 	$('#btnRight').click(function (e) {
 		if ($('#user option:selected').val()=="") {
 			alert("Select User Before plant assignment")
@@ -149,7 +151,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 function filterRequirements() {
-	var date = $('#filter_date__1i').val()+'-'+$('#filter_date__2i').val()+'-'+$('#filter_date__3i').val();
+	var date = $('.mr-date-filter').val();
 	var item_type = $('.material_requirements_item_type_filter').val();
 	var only_red = $('.material_requirements_only_red_filter').is(':checked');
 	window.location = "?plants=" + $('.material_requirements_plants_filter').val() + "&date="+date+'&item_type='+item_type+'&only_red='+only_red;

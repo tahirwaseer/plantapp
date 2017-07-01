@@ -5,17 +5,18 @@
 		<div class="row">
 		  <div class="col-sm-3 user-selection">
     		<label>Plants</label><br>
-		    <%= select_tag "plants", options_from_collection_for_select(@plants.order(:plant_name), "id", "plant_name",@selected.map{|p| p.id}),class: "form-control selectbox material_requirements_plants_filter", multiple: true %>
+		    <%= select_tag "plants", options_from_collection_for_select(@plants.order(:plant_name), "id", "plant_name",@selected.map{|p| p.id}),class: "form-control material_requirements_plants_filter", multiple: true %>
 		  </div>
-		  <div class="col-sm-3 mr-date-filter">
+		  <div class="col-sm-3">
 		    <label>Order Date</label><br>
-		    <%= date_select("filter_date","", :default => @fdate,class: 'material_requirements_date_filter')%>
+    		<%= text_field_tag 'filter_date', @fdate, class: 'datepicker mr-date-filter', style: 'width: 90%;' %>
+		    <%#= date_select("filter_date","", :default => @fdate,class: 'material_requirements_date_filter')%>
 		  </div>
-		  <div class="col-sm-2">
+		  <div class="col-sm-3">
 		    <label>Item Type</label><br>
-		    <%= select_tag "item_type_filter", options_from_collection_for_select(MaterialRequirement.select(:item_type).distinct, "item_type", "item_type",params[:item_type]),class: "material_requirements_item_type_filter",prompt: 'Select Item Type' %>
+		    <%= select_tag "item_type_filter", options_from_collection_for_select(MaterialRequirement.select(:item_type).distinct, "item_type", "item_type",params[:item_type]),class: "material_requirements_item_type_filter selectbox",prompt: 'Select Item Type' %>
 		  </div>
-		  <div class="col-sm-2">
+		  <div class="col-sm-3">
 		    <label for="only_red">Show Only Red</label><br>
 		    <%= check_box_tag(:only_red, params[:only_red],params[:only_red]== 'true' ? true : false,class: 'material_requirements_only_red_filter') %>
 		  </div>

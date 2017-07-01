@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require jquery.selectlistactions.js 
 //= require jquery.sumoselect.min.js
 //= require_tree .
