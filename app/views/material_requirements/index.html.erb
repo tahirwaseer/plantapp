@@ -14,7 +14,7 @@
     <label>Plants</label><br>
     <%= select_tag "plants", options_from_collection_for_select(Plant.active.order(:plant_name), "id", "plant_name",@plants.map{|p| p.id}),class: "form-control selectbox material_requirements_plants_filter", multiple: true %>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-3 mr-date-filter">
     <label>Order Date</label><br>
     <%= date_select("filter_date","", :default => @fdate,class: 'material_requirements_date_filter')%>
   </div>
@@ -26,9 +26,9 @@
     <label for="only_red">Show Only Red</label><br>
     <%= check_box_tag(:only_red, params[:only_red],params[:only_red]== 'true' ? true : false,class: 'material_requirements_only_red_filter') %>
   </div>
-  <div class="col-sm-2">
+  <!-- <div class="col-sm-2">
     <button id="filter_matirial_requiements" class="btn btn-success">Filter</button>
-  </div>
+  </div> -->
 </div>
 <br>
 <div class="row">
